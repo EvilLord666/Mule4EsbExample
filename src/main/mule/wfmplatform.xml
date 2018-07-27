@@ -16,8 +16,8 @@ http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/jav
 		<logger level="INFO" doc:name="Logger" doc:id="9babe524-55eb-4f13-aca0-a661e89bab58" message="Http payload is: #[payload]"/>
 		<java:new doc:name="Create ReportsManager" doc:id="50598e81-889c-48cf-98db-2d7b197a720e" class="ru.abcconsulting.wfmplatform.ReportsManager" constructor="ReportsManager()" target="reportManager">
 		</java:new>
-		<java:invoke doc:name="ReportsManager Generate" doc:id="83f6e065-bb3a-4b50-be47-ca8ff3797715" class="ru.abcconsulting.wfmplatform.ReportsManager" method="generateReport" instance="#[vars.reportManager]">
-			<java:args ><![CDATA[#[{reportParameters: new Object[0]}]]]></java:args>
+		<java:invoke doc:name="ReportsManager Generate" doc:id="83f6e065-bb3a-4b50-be47-ca8ff3797715" class="ru.abcconsulting.wfmplatform.ReportsManager" method="generateReport(String)" instance="#[vars.reportManager]">
+			<java:args><![CDATA[#[{arg0: " "}]]]></java:args>
 		</java:invoke>
 	</flow>
 </mule>
