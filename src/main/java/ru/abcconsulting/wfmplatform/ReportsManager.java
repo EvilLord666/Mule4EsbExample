@@ -7,7 +7,7 @@ public class ReportsManager {
     	 
      }
      
-     public void generateReport(Object[] reportsParameters) {
+     public void generateReport(Object[] reportParameters) {
     	 try {
     	     showStateImpl("Started");
     	     // todo: umv: generate impl
