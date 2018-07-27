@@ -1,0 +1,22 @@
+{
+  "configs": [
+    "wfmplatform.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "wfmplatform",
+  "minMuleVersion": "4.1.2",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+         "exportedResources": [],
+         "exportedPackages":["ru.abcconsulting.wfmplatform"]
+     }
+  },
+  
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}
