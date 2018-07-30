@@ -2,10 +2,14 @@ package ru.abcconsulting.wfmplatform;
 
 import java.util.*;
 
+/// Tutorials: 
+/// 1) https://technicalmumbojumbo.wordpress.com/2014/01/10/mule-esb-tutorial-series-an-introduction/
 ///
 /// See https://docs.mulesoft.com/mule4-user-guide/v/4.1/intro-java-integration
 /// and
 /// https://docs.mulesoft.com/connectors/java-invoke-method
+/// and
+/// https://dzone.com/articles/mule-40-new-java-module
 /// for how to invoke Java code
 ///
 public class ReportsManager {
@@ -18,6 +22,7 @@ public class ReportsManager {
      /// https://docs.mulesoft.com/mule4-user-guide/v/4.1/transform-component-about
      /// messageBody is string representation of HTTP Request
      ///
+     /// must receive specialized Object, representing report Job parameters
      public void generateReport(String messageBody) {
     	 try {
     	     showStateImpl("Started");
