@@ -2,6 +2,9 @@ package ru.abcconsulting.wfmplatform;
 
 import java.util.*;
 import org.apache.log4j.*;
+import org.mule.runtime.core.internal.processor.LoggerMessageProcessor;
+
+import javassist.bytecode.stackmap.TypeData.ClassName;
 
 /// Tutorials: 
 /// 1) https://technicalmumbojumbo.wordpress.com/2014/01/10/mule-esb-tutorial-series-an-introduction/
@@ -15,7 +18,7 @@ import org.apache.log4j.*;
 ///
 public class ReportsManager {
      public ReportsManager() {
-    	 
+    	 _logger = Logger.getLogger(ClassName.class);
      }
      
      ///
@@ -39,8 +42,11 @@ public class ReportsManager {
      }
      
      private void showStateImpl(String state) {
-    	 System.out.printf(STATE_MESSAGE_TEMPLATE, new Object[] {state});
+    	 String message = String.format(STATE_MESSAGE_TEMPLATE, new Object[] {state});
+    	 _logger.info(message);
+    	 //System.out.printf(STATE_MESSAGE_TEMPLATE, new Object[] {state});
      }
      
      private static final String STATE_MESSAGE_TEMPLATE = "Current state is: %s";
+     private Logger _logger;
 }
