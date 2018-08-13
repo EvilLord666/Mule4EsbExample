@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:java="http://www.mulesoft.org/schema/mule/java" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:netsuite="http://www.mulesoft.org/schema/mule/netsuite" xmlns:java="http://www.mulesoft.org/schema/mule/java"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
-http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd">
-	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="0f77d8c0-c14d-443e-8063-296690265091" basePath="/app1" >
+http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd
+http://www.mulesoft.org/schema/mule/netsuite http://www.mulesoft.org/schema/mule/netsuite/current/mule-netsuite.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="0f77d8c0-c14d-443e-8063-296690265091" basePath="/api/reporting" >
 		<http:listener-connection host="127.0.0.1" port="8088"/>
 	</http:listener-config>
 	<flow name="wfmReportingFlow" doc:id="16131a2f-5fd6-4e55-9a6d-abf50ef45e02" >
@@ -14,10 +15,15 @@ http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/jav
 			<ee:repeatable-file-store-stream />
 		</http:listener>
 		<logger level="INFO" doc:name="Logger" doc:id="9babe524-55eb-4f13-aca0-a661e89bab58" message="Http payload is: #[payload]"/>
-		<java:new doc:name="Create ReportsManager" doc:id="50598e81-889c-48cf-98db-2d7b197a720e" class="ru.abcconsulting.wfmplatform.ReportsManager" constructor="ReportsManager()" target="reportManager">
+		<set-variable value="#[attributes.relativePath]" doc:name="Set path" doc:id="6da7925c-b541-48c1-9780-4ef3a945eb68" variableName="relativePath"/>
+		<choice doc:name="Router" doc:id="aad15075-163a-4b66-92a6-275948d5c866" >
+			<when expression='#[vars.relativePath] == "/api/reporting/reports"' >
+				<java:new doc:name="Create ReportsManager" doc:id="50598e81-889c-48cf-98db-2d7b197a720e" class="ru.abcconsulting.wfmplatform.ReportsManager" constructor="ReportsManager()" target="reportManager">
 		</java:new>
-		<java:invoke doc:name="ReportsManager Generate" doc:id="83f6e065-bb3a-4b50-be47-ca8ff3797715" class="ru.abcconsulting.wfmplatform.ReportsManager" method="generateReport(String)" instance="#[vars.reportManager]">
+				<java:invoke doc:name="ReportsManager Generate" doc:id="83f6e065-bb3a-4b50-be47-ca8ff3797715" class="ru.abcconsulting.wfmplatform.ReportsManager" method="generateReport(String)" instance="#[vars.reportManager]">
 			<java:args><![CDATA[#[{arg0: " "}]]]></java:args>
 		</java:invoke>
+			</when>
+		</choice>
 	</flow>
 </mule>

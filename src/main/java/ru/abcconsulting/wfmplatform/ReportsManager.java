@@ -1,6 +1,7 @@
 package ru.abcconsulting.wfmplatform;
 
 import java.util.*;
+import org.apache.log4j.*;
 
 /// Tutorials: 
 /// 1) https://technicalmumbojumbo.wordpress.com/2014/01/10/mule-esb-tutorial-series-an-introduction/
