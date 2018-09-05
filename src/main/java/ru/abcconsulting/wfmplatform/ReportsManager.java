@@ -15,7 +15,8 @@ import org.apache.log4j.*;
 ///
 public class ReportsManager {
      public ReportsManager() {
-    	 _logger = Logger.getLogger(ReportsManager.class);
+    	 BasicConfigurator.configure();
+    	 _logger.info("Reports manager instantation");
      }
      
      ///
@@ -24,7 +25,7 @@ public class ReportsManager {
      /// messageBody is string representation of HTTP Request
      ///
      /// must receive specialized Object, representing report Job parameters
-     public void generateReport(String messageBody) {
+     public String generateReport(String params) {
     	 try {
     	     showStateImpl("Started");
     	     /* todo: umv: generate report implementation via service call
@@ -36,8 +37,10 @@ public class ReportsManager {
     		 showStateImpl("Failed");
     	 }
     	 finally {
-    		 showStateImpl("Finished");
-    	 }
+    		 showStateImpl("Finished");		
+    	 } 
+    	 // todo: umv: providing some result, return Object or JSON
+    	 return "generate report finished";
      }
      
      private void showStateImpl(String state) {
@@ -47,5 +50,5 @@ public class ReportsManager {
      }
      
      private static final String STATE_MESSAGE_TEMPLATE = "Current state is: %s";
-     private Logger _logger;
+     private Logger _logger = LogManager.getLogger(ReportsManager.class);
 }
