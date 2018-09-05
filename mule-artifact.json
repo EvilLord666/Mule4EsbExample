@@ -11,7 +11,10 @@
     "id": "mule",
     "attributes": {
          "exportedResources": [],
-         "exportedPackages":["ru.abcconsulting.wfmplatform"]
+         "exportedPackages":[
+             "ru.abcconsulting.wfmplatform",
+             "ru.abcconsulting.wfmplatform.info"
+         ]
      }
   },
   

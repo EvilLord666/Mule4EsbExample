@@ -26,7 +26,8 @@ http://www.mulesoft.org/schema/mule/netsuite http://www.mulesoft.org/schema/mule
 		</java:invoke>
 			</when>
 			<when expression='#[attributes.relativePath == "/version"]' >
-				<java:invoke-static doc:name="Get API Version Info" doc:id="2dd7262d-8bf4-45e4-b011-5deda2f6f771" class="ru.abcconsulting.wfmplatform.info.InfoProvider" method="getApiVersion()"/>
+				<java:invoke-static doc:name="Get API Version Info" doc:id="2dd7262d-8bf4-45e4-b011-5deda2f6f771" class="ru.abcconsulting.wfmplatform.info.InfoProvider" method="getApiVersion()">
+				</java:invoke-static>
 			</when>
 		</choice>
 	</flow>

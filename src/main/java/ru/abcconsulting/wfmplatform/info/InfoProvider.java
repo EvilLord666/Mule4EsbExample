@@ -1,5 +1,8 @@
 package ru.abcconsulting.wfmplatform.info;
 
+/*
+ *  Do not forger to export class (https://profit-online.pl/2018/03/mule-4-new-java-module/)
+ * */
 public class InfoProvider {
    public InfoProvider() {
 	   
