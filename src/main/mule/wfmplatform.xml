@@ -14,11 +14,20 @@ http://www.mulesoft.org/schema/mule/netsuite http://www.mulesoft.org/schema/mule
 		<http:listener doc:name="Reporting REST Listener" doc:id="b1b2b775-ac35-4c0c-ad9b-409b4174b6fa" config-ref="HTTP_Listener_config" path="/{paramname}">
 			<ee:repeatable-file-store-stream />
 		</http:listener>
-		<logger level="INFO" doc:name="Logger" doc:id="9babe524-55eb-4f13-aca0-a661e89bab58" message="Http payload is: #[payload]"/>
-		<java:new doc:name="Create ReportsManager" doc:id="50598e81-889c-48cf-98db-2d7b197a720e" class="ru.abcconsulting.wfmplatform.ReportsManager" constructor="ReportsManager()" target="reportManager">
+		<logger level="INFO" doc:name="Logger" doc:id="9babe524-55eb-4f13-aca0-a661e89bab58" message="Relative path is: #[attributes.relativePath]"/>
+		<choice doc:name="API Routing" doc:id="ac40ee88-f585-4fd8-a1e2-c16dab69605d" doc:description="Not really good routing at tis time:
+1) Map GET to see available reports, respond with JSON
+2) Generate reports with params">
+			<when expression='#[attributes.relativePath == "/reports"]' >
+				<java:new doc:name="Create ReportsManager" doc:id="50598e81-889c-48cf-98db-2d7b197a720e" class="ru.abcconsulting.wfmplatform.ReportsManager" constructor="ReportsManager()" target="reportManager">
 		</java:new>
-		<java:invoke doc:name="ReportsManager Generate" doc:id="83f6e065-bb3a-4b50-be47-ca8ff3797715" class="ru.abcconsulting.wfmplatform.ReportsManager" method="generateReport(String)" instance="#[vars.reportManager]" doc:description="parameters is stubbed now, we should genberate object based on Uri parameters">
+				<java:invoke doc:name="ReportsManager Generate" doc:id="83f6e065-bb3a-4b50-be47-ca8ff3797715" class="ru.abcconsulting.wfmplatform.ReportsManager" method="generateReport(String)" instance="#[vars.reportManager]" doc:description="parameters is stubbed now, we should genberate object based on Uri parameters">
 			<java:args><![CDATA[#[{arg0: " "}]]]></java:args>
 		</java:invoke>
+			</when>
+			<when expression='#[attributes.relativePath == "/version"]' >
+				<java:invoke-static doc:name="Get API Version Info" doc:id="2dd7262d-8bf4-45e4-b011-5deda2f6f771" class="ru.abcconsulting.wfmplatform.info.InfoProvider" method="getApiVersion()"/>
+			</when>
+		</choice>
 	</flow>
 </mule>
