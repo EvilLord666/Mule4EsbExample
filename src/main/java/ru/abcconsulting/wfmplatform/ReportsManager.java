@@ -27,7 +27,9 @@ public class ReportsManager {
      public void generateReport(String messageBody) {
     	 try {
     	     showStateImpl("Started");
-    	     // todo: umv: generate impl
+    	     /* todo: umv: generate report implementation via service call
+    	        or some other way 
+    	      */
     	     showStateImpl("Succeseeded");
     	 }
     	 catch (Exception e) {
