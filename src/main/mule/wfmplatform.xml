@@ -16,8 +16,9 @@ http://www.mulesoft.org/schema/mule/netsuite http://www.mulesoft.org/schema/mule
 		</http:listener>
 		<logger level="INFO" doc:name="Logger" doc:id="9babe524-55eb-4f13-aca0-a661e89bab58" message="Relative path is: #[attributes.relativePath]"/>
 		<choice doc:name="API Routing" doc:id="ac40ee88-f585-4fd8-a1e2-c16dab69605d" doc:description="Not really good routing at tis time:
-1) Map GET to see available reports, respond with JSON
-2) Generate reports with params">
+1) Map GET to see available reports, respond with JSON (the best way to place another choice after Create of ReportsManager)
+2) Generate reports with params
+3) Return 404 by default">
 			<when expression='#[attributes.relativePath == "/reports"]' >
 				<java:new doc:name="Create ReportsManager" doc:id="50598e81-889c-48cf-98db-2d7b197a720e" class="ru.abcconsulting.wfmplatform.ReportsManager" constructor="ReportsManager()" target="reportManager">
 		</java:new>
