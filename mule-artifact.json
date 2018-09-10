@@ -10,14 +10,15 @@
   "classLoaderModelLoaderDescriptor": {
     "id": "mule",
     "attributes": {
-         "exportedResources": [],
-         "exportedPackages":[
-             "ru.abcconsulting.wfmplatform",
-             "ru.abcconsulting.wfmplatform.info"
-         ]
-     }
+      "exportedResources": [
+        "api\\TestAPI.raml"
+      ],
+      "exportedPackages": [
+        "ru.abcconsulting.wfmplatform",
+        "ru.abcconsulting.wfmplatform.info"
+      ]
+    }
   },
-  
   "bundleDescriptorLoader": {
     "id": "mule",
     "attributes": {}
