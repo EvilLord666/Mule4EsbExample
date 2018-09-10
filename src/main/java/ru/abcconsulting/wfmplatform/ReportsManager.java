@@ -40,7 +40,7 @@ public class ReportsManager {
     		 showStateImpl("Finished");		
     	 } 
     	 // todo: umv: providing some result, return Object or JSON
-    	 return "generate report finished";
+    	 return "{\"result\":\"generate report finished\"}";
      }
      
      private void showStateImpl(String state) {
